@@ -1,6 +1,13 @@
 package servicios;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import modelos.Agente;
+import utilidades.Lector;
 
 public class Principal {
 
@@ -19,6 +26,7 @@ public class Principal {
 		}
 		 */
 		
+		/*
 		// Version 2.0 usando POO para la carga de los costes
 		
 		Agente a = new Agente();
@@ -41,6 +49,8 @@ public class Principal {
 		System.out.println(b);
 		System.out.println(c);
 		System.out.println(d);
+		*/
+		
 		
 		//Compruebo si se ha pasado algun argumento
 		if (args.length < 1) {
@@ -68,6 +78,23 @@ public class Principal {
 			} else if (args.length == 4) {
 				
 				//Implementacion logica para los 4 argumentos
+				
+				Lector.fichero = new File(args[2]);
+				
+				try {
+					
+					ArrayList<Agente> agentes = Lector.leerFicheroYCargarDatos();
+					for (Agente agente : agentes) {
+						System.out.println(Arrays.toString(agente.getTareasAgente()));
+					}
+					
+				} catch (FileNotFoundException e) {
+					// Logica para pedir los datos por entrada estandar
+					e.printStackTrace();
+				} catch (IOException e) {
+
+					System.err.println("Error en la entrada y salida de datos: " + e.getMessage());
+				}
 				
 				
 			} else {

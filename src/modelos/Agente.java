@@ -12,6 +12,11 @@ public class Agente {
 		super();
 	}
 
+	public Agente(int[] tareasAgente) {
+		super();
+		this.tareasAgente = tareasAgente;
+	}
+
 	// Getters y Setters
 
 	public int[] getTareasAgente() {
