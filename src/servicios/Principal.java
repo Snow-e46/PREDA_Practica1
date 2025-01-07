@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Scanner;
 
 import modelos.Agente;
 import utilidades.Lector;
@@ -79,6 +81,8 @@ public class Principal {
 				
 				//Implementacion logica para los 4 argumentos
 				
+				if (args[1].equalsIgnoreCase("-h")) imprimirAyuda();
+				
 				Lector.fichero = new File(args[2]);
 				
 				try {
@@ -90,7 +94,21 @@ public class Principal {
 					
 				} catch (FileNotFoundException e) {
 					// Logica para pedir los datos por entrada estandar
-					e.printStackTrace();
+					
+					System.err.println("No se ha encontrado " + args[2] + " como [fichero entrada]");
+					
+					Scanner sc = new Scanner(System.in);
+					
+					System.out.println("Indique la dimension de la matriz cuadrada: ");
+
+					int dimension = sc.nextInt();
+					
+					ArrayList<Agente> agentes = solicitarAgentesEntradaEstandar(dimension);
+					
+					for (Agente agente : agentes) {
+						System.out.println(Arrays.toString(agente.getTareasAgente()));
+					}
+					
 				} catch (IOException e) {
 
 					System.err.println("Error en la entrada y salida de datos: " + e.getMessage());
@@ -114,6 +132,38 @@ public class Principal {
 		System.out.println("-h \t \t \t Muestra esta ayuda");
 		System.out.println("[fichero entrada] \t Nombre del fichero de entrada");
 		System.out.println("[fichero salida] \t Nombre del fichero de salida");
+		
+	}
+	
+	public static ArrayList<Agente> solicitarAgentesEntradaEstandar(int dimension) {
+		
+		ArrayList<Agente> agentes = new ArrayList<Agente>();
+		Scanner sc = new Scanner(System.in);
+		
+		for (int i = 0; i < dimension; i++) {
+			
+			System.out.println("Introduzca los costes para el agente " + (i+1) + ": ");
+			int [] costesPorAgente = new int [dimension];
+			
+			for (int j = 0; j < dimension; j++) {
+				
+				costesPorAgente[j] = sc.nextInt();
+				
+				if (costesPorAgente[j] < 0) {
+
+					System.err.println("Error con los costes, no pueden ser negativos");
+					return null;
+
+				}
+				
+			}
+			
+			Agente nuevoAgenteEntradaEstandar = new Agente(costesPorAgente);
+			agentes.add(nuevoAgenteEntradaEstandar);
+			
+		}
+		
+		return agentes;
 		
 	}
 	
