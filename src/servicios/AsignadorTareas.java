@@ -11,12 +11,12 @@ import modelos.Nodo;
 public class AsignadorTareas {
 
 	public static void asignarTareas(ArrayList<Agente> agentes, String archivoSalida, boolean trazar) {
-		int n = agentes.size(); // Número de agentes y tareas
+		int n = agentes.size();
 
-		// Cola de prioridad para nodos más prometedores
+		// Cola de prioridad para nodos mas prometedores
 		PriorityQueue<Nodo> cola = new PriorityQueue<>();
 
-		// Nodo raíz
+		// Nodo raiz
 		Nodo raiz = new Nodo(0, 0, new ArrayList<>());
 		cola.add(raiz);
 
@@ -37,7 +37,7 @@ public class AsignadorTareas {
 			}
 
 			if (actual.getNivel() == n) {
-				// Nodo hoja: verificar si es solución mejor
+				// Nodo hoja: verificar si es solucion mejor
 				if (actual.getCostoAcumulado() < costoMinimo) {
 					costoMinimo = actual.getCostoAcumulado();
 					mejorAsignacion = actual.getAsignaciones();
@@ -51,7 +51,7 @@ public class AsignadorTareas {
 					ArrayList<Integer> nuevaAsignacion = new ArrayList<>(actual.getAsignaciones());
 					nuevaAsignacion.add(tarea);
 
-					// Obtener el costo del agente actual para la tarea específica
+					// Obtener el costo del agente actual para la tarea especifica
 					int nuevoCosto = actual.getCostoAcumulado()
 							+ agentes.get(actual.getNivel()).getTareasAgente()[tarea];
 

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Nodo implements Comparable<Nodo> {
 
-	private int nivel; // Nivel del árbol
-	private int costoAcumulado; // Costo acumulado hasta el nodo
-	private ArrayList<Integer> asignaciones; // Asignaciones parciales
+	private int nivel;
+	private int costoAcumulado;
+	private ArrayList<Integer> asignaciones; 
 
 	// Constructor
 	public Nodo(int nivel, int costoAcumulado, ArrayList<Integer> asignaciones) {
